@@ -1,0 +1,35 @@
+# XAMPP/WAMP specific
+.htaccess
+php.ini
+
+# Database credentials (if any local configs)
+config/database.local.php
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.log
+*.cache
+
+# Environment files
+.env
+.env.local
+
+# Uploads directory (if you add one later)
+uploads/
+
+# Backup files
+*.bak
+*.backup
+
