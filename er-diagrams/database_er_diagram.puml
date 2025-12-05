@@ -1,0 +1,115 @@
+@startuml EmailSubscriptionSchema
+' Title
+title Email List Subscription Project — ER Diagram
+
+' Use the entity style
+skinparam classAttributeIconSize 0
+
+entity "departments" as departments {
+  * department_id : INT <<PK>>
+  --
+  department_name : VARCHAR(100)
+  description : TEXT
+  head_employee_id : INT <<FK, nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "employees" as employees {
+  * employee_id : INT <<PK>>
+  --
+  first_name : VARCHAR(50)
+  last_name : VARCHAR(50)
+  email : VARCHAR(255)
+  phone : VARCHAR(20)
+  job_title : VARCHAR(100)
+  department_id : INT <<FK>>
+  is_supervisor : TINYINT(1)
+  hire_date : DATE
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "department_supervisors" as department_supervisors {
+  * department_id : INT <<PK,FK>>
+  * employee_id : INT <<PK,FK>>
+  --
+  appointed_at : DATE
+}
+
+entity "email_imports" as email_imports {
+  * import_id : INT <<PK>>
+  --
+  imported_by_employee_id : INT <<FK, nullable>>
+  imported_at : TIMESTAMP
+  file_name : VARCHAR(255)
+  row_count : INT
+  success_count : INT
+  fail_count : INT
+}
+
+entity "email_subscriptions" as email_subscriptions {
+  * subscription_id : INT <<PK>>
+  --
+  email : VARCHAR(255)
+  first_name : VARCHAR(50)
+  last_name : VARCHAR(50)
+  subscribed_at : TIMESTAMP
+  status : ENUM('active','unsubscribed','bounced')
+  source : VARCHAR(50)
+  ip_address : VARCHAR(45)
+  user_agent : TEXT
+  notes : TEXT
+  created_by_employee_id : INT <<FK, nullable>>
+  assigned_employee_id : INT <<FK, nullable>>
+  last_updated_by_employee_id : INT <<FK, nullable>>
+  import_id : INT <<FK, nullable>>
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "email_subscription_audit" as email_subscription_audit {
+  * audit_id : INT <<PK>>
+  --
+  subscription_id : INT <<FK, nullable>>
+  action : ENUM('INSERT','UPDATE','DELETE')
+  changed_by_employee_id : INT <<FK, nullable>>
+  changed_at : TIMESTAMP
+  old_email : VARCHAR(255)
+  new_email : VARCHAR(255)
+  old_status : ENUM('active','unsubscribed','bounced')
+  new_status : ENUM('active','unsubscribed','bounced')
+  details : TEXT
+}
+
+' Relationships
+departments ||--o{ employees : "department_id"
+departments ||--o{ department_supervisors : "department_id"
+employees ||--o{ department_supervisors : "employee_id"
+
+employees ||--o{ email_imports : "imported_by_employee_id"
+employees ||--o{ email_subscriptions : "created_by_employee_id"
+employees ||--o{ email_subscriptions : "assigned_employee_id"
+employees ||--o{ email_subscriptions : "last_updated_by_employee_id"
+
+email_imports ||--o{ email_subscriptions : "import_id"
+
+email_subscriptions ||--o{ email_subscription_audit : "subscription_id"
+employees ||--o{ email_subscription_audit : "changed_by_employee_id"
+
+' departments.head_employee_id -> employees.employee_id (single head)
+departments }o--|| employees : "head_employee_id"
+
+' Notes for clarity
+note left of department_supervisors
+  Mapping table:
+  many supervisors per department
+  (department_id, employee_id) PK
+end note
+
+note right of email_subscriptions
+  Subscribers are usually external contacts.
+  ownership/audit FKs are nullable.
+end note
+
+@enduml

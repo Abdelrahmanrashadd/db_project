@@ -1,0 +1,12 @@
+email,first_name,last_name,status,source
+michael.scott@example.com,Michael,Scott,active,website
+pam.beesly@example.com,Pam,Beesly,active,newsletter
+dwight.schrute@example.com,Dwight,Schrute,unsubscribed,website
+jim.halpert@example.com,Jim,Halpert,active,campaign
+angela.martin@example.com,Angela,Martin,active,newsletter
+kevin.malone@example.com,Kevin,Malone,bounced,website
+oscar.martinez@example.com,Oscar,Martinez,active,newsletter
+stanley.hudson@example.com,Stanley,Hudson,active,website
+phyllis.vance@example.com,Phyllis,Vance,unsubscribed,newsletter
+toby.flenderson@example.com,Toby,Flenderson,active,website
+

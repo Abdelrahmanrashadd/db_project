@@ -1,0 +1,14 @@
+email,first_name,last_name,status,source
+john.doe@example.com,John,Doe,active,website
+jane.smith@example.com,Jane,Smith,active,newsletter
+bob.johnson@example.com,Bob,Johnson,active,website
+alice.williams@example.com,Alice,Williams,active,campaign
+charlie.brown@example.com,Charlie,Brown,active,website
+diana.prince@example.com,Diana,Prince,active,newsletter
+frank.miller@example.com,Frank,Miller,active,website
+grace.kelly@example.com,Grace,Kelly,active,newsletter
+henry.ford@example.com,Henry,Ford,active,campaign
+isabel.martinez@example.com,Isabel,Martinez,active,website
+jack.black@example.com,Jack,Black,active,newsletter
+kate.winslet@example.com,Kate,Winslet,active,website
+

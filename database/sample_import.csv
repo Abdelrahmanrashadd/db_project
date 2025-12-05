@@ -1,0 +1,7 @@
+email,first_name,last_name,status,source
+sample1@example.com,John,Doe,active,website
+sample2@example.com,Jane,Smith,active,newsletter
+sample3@example.com,Bob,Johnson,active,campaign
+sample4@example.com,Alice,Williams,active,website
+sample5@example.com,Charlie,Brown,active,newsletter
+
